@@ -28,17 +28,32 @@ if not SECRET_KEY:
 
 DEBUG = os.getenv('DEBUG', 'False').lower() == 'true' and not IS_PRODUCTION
 
+IS_RAILWAY = os.getenv("RAILWAY_ENVIRONMENT") is not None
+
 if IS_RAILWAY:
-    railway_domain = os.getenv('RAILWAY_STATIC_URL', 'your-app.up.railway.app')
-    ALLOWED_HOSTS = [railway_domain, 'localhost', '127.0.0.1', '0.0.0.0']
-    CSRF_TRUSTED_ORIGINS = [f"https://{railway_domain}"]
-else:
-    ALLOWED_HOSTS = ['*']
-    CSRF_TRUSTED_ORIGINS = [
-        'http://localhost:8000',
-        'http://127.0.0.1:8000',
-        'http://0.0.0.0:8000',
+    ALLOWED_HOSTS = [
+        "localhost",
+        "127.0.0.1",
+        "0.0.0.0",
+        ".railway.app",
     ]
+
+    CSRF_TRUSTED_ORIGINS = [
+        "https://*.railway.app",
+    ]
+
+    SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
+    SECURE_SSL_REDIRECT = True
+
+else:
+    ALLOWED_HOSTS = ["*"]
+
+    CSRF_TRUSTED_ORIGINS = [
+        "http://localhost:8000",
+        "http://127.0.0.1:8000",
+        "http://0.0.0.0:8000",
+    ]
+
 
 # =======================
 # INSTALLED APPS
