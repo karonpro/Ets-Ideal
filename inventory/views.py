@@ -100,20 +100,21 @@ def inventory_dashboard(request):
 # =======================
 @login_required
 def product_list(request):
-    # Get user locations
     user_locations = get_user_locations(request.user)
-    
-    # Base queryset with optimizations
-    products = Product.objects.filter(
-        stocks__location__in=user_locations
-    ).select_related('category').prefetch_related(
+
+    products = Product.objects.all().select_related(
+        'category'
+    ).prefetch_related(
         models.Prefetch(
             'stocks',
-            queryset=ProductStock.objects.filter(location__in=user_locations).select_related('location')
+            queryset=ProductStock.objects.filter(
+                location__in=user_locations
+            ).select_related('location'),
+            to_attr='filtered_stocks'
         )
-    ).distinct()
-    
-    # Handle search
+    )
+
+    # Search
     search_query = request.GET.get('q', '')
     if search_query:
         products = products.filter(
@@ -121,44 +122,41 @@ def product_list(request):
             Q(sku__icontains=search_query) |
             Q(category__name__icontains=search_query)
         )
-    
-    # Handle category filter
+
+    # Category filter
     category_filter = request.GET.get('category', '')
     if category_filter:
         products = products.filter(category_id=category_filter)
-    
-    # Handle sorting
+
+    # Sorting
     sort_by = request.GET.get('sort', 'name')
     if sort_by in ['name', 'sku', 'category__name']:
         products = products.order_by(sort_by)
     else:
         products = products.order_by('name')
-    
-    # Pagination
+
     paginator = Paginator(products, 50)
-    page_number = request.GET.get('page')
-    page_obj = paginator.get_page(page_number)
-    
-    # Prepare product data
+    page_obj = paginator.get_page(request.GET.get('page'))
+
     product_data = []
     low_stock_count = 0
     out_of_stock_count = 0
-    
+
     for product in page_obj:
-        stocks = product.stocks.all()  # Already prefetched
+        stocks = getattr(product, 'filtered_stocks', [])
         total_stock = sum(stock.quantity for stock in stocks)
-        
+
         if total_stock == 0:
             out_of_stock_count += 1
         elif total_stock <= product.reorder_level:
             low_stock_count += 1
-        
+
         product_data.append({
             'product': product,
             'stocks': stocks,
             'total_stock': total_stock
         })
-    
+
     context = {
         'product_data': product_data,
         'categories': Category.objects.all(),
@@ -169,7 +167,9 @@ def product_list(request):
         'page_obj': page_obj,
         'sort_by': sort_by,
     }
+
     return render(request, 'inventory/product_list.html', context)
+
 
 @login_required
 def product_detail(request, product_id):
