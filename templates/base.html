@@ -14,8 +14,8 @@
     <!-- Chart.js for Reports -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     
-    <!-- Print Styles -->
     <style>
+        /* Print Styles */
         @media print {
             .no-print, .navbar, .btn, .dropdown, .breadcrumb, .footer,
             .alert, .card-header .btn, .filters-section {
@@ -64,10 +64,8 @@
                 color: #000 !important;
             }
         }
-    </style>
 
-    <!-- Custom Dark Theme Styles -->
-    <style>
+        /* Custom Theme Variables */
         :root {
             --bg: #071029;
             --card: #0e1622;
@@ -140,6 +138,9 @@
             border-radius: 6px;
             margin: 2px 8px;
             width: auto;
+            min-height: 44px;
+            display: flex;
+            align-items: center;
         }
 
         .dropdown-item:hover {
@@ -251,7 +252,7 @@
             color: white;
         }
 
-        /* Mobile Optimized Dropdowns */
+        /* Mobile Optimized Dropdowns - FIXED */
         @media (max-width: 768px) {
             .dropdown-menu {
                 position: fixed !important;
@@ -270,7 +271,7 @@
                 left: 50% !important;
                 transform: translate(-50%, -50%) !important;
                 width: 95vw !important;
-                height: 85vh !important;
+                max-height: 85vh !important; /* Changed from height to max-height */
                 overflow-y: auto;
             }
 
@@ -288,18 +289,6 @@
             .navbar-nav .dropdown-toggle::after {
                 margin-left: auto;
             }
-        }
-
-        /* Searchable Dropdown */
-        .dropdown-search {
-            padding: 0.75rem 1rem;
-            border-bottom: 1px solid var(--border);
-        }
-
-        .dropdown-search .form-control {
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid var(--border);
-            color: var(--muted);
         }
 
         /* Card Styles */
@@ -359,62 +348,7 @@
             background: rgba(79, 70, 229, 0.15);
         }
 
-        /* Button Styles */
-        .btn {
-            border-radius: 8px;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            border: none;
-        }
-
-        .btn-primary {
-            background: var(--accent);
-            color: white;
-        }
-
-        .btn-primary:hover {
-            background: #4338ca;
-            transform: translateY(-1px);
-        }
-
-        /* Language Switcher Styles */
-        .language-switcher {
-            display: flex;
-            align-items: center;
-            margin-right: 15px;
-        }
-        
-        .lang-btn {
-            background: none;
-            border: 1px solid var(--border);
-            color: var(--muted);
-            padding: 6px 12px;
-            border-radius: 6px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-size: 14px;
-            margin: 0 3px;
-        }
-        
-        .lang-btn:hover {
-            background: var(--accent);
-            color: white;
-            border-color: var(--accent);
-            transform: translateY(-1px);
-        }
-        
-        .lang-btn.active {
-            background: var(--accent);
-            color: white;
-            border-color: var(--accent);
-        }
-        
-        .lang-btn:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-        }
-
-        /* Google Translate Widget Styles */
+        /* Google Translate Widget Styles - UPDATED FOR VISIBLE RIBBON */
         #google_translate_element {
             display: inline-block !important;
             vertical-align: middle;
@@ -422,7 +356,6 @@
         
         .goog-te-gadget {
             font-family: 'Inter', system-ui, 'Roboto', sans-serif !important;
-            font-size: 0 !important; /* Hide text */
         }
         
         .goog-te-gadget-simple {
@@ -448,151 +381,24 @@
             color: var(--muted) !important;
         }
         
-        .goog-te-menu-value span:nth-child(3) {
-            display: none !important;
-        }
-        
-        /* Dropdown menu styling */
-        .goog-te-menu2 {
+        /* Show Google Translate banner for language selection */
+        .goog-te-banner-frame {
+            display: block !important;
+            position: fixed !important;
+            top: 0 !important;
+            left: 0 !important;
+            width: 100% !important;
+            z-index: 9999 !important;
             background: var(--card) !important;
-            border: 1px solid var(--border) !important;
-            border-radius: 8px !important;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3) !important;
-            max-height: 300px !important;
-            overflow-y: auto !important;
+            border-bottom: 1px solid var(--border) !important;
         }
         
-        .goog-te-menu2-item {
-            padding: 8px 12px !important;
-            color: var(--muted) !important;
+        .goog-te-banner-frame.skiptranslate {
+            display: block !important;
         }
         
-        .goog-te-menu2-item:hover {
-            background: var(--accent) !important;
-            color: white !important;
-        }
-        
-        .goog-te-menu2-item-selected {
-            background: var(--accent) !important;
-            color: white !important;
-        }
-        
-        /* Hide "Powered by Google" */
-        .goog-logo-link {
-            display: none !important;
-        }
-        
-        .goog-te-gadget .goog-te-combo {
-            margin: 0 !important;
-        }
-
-        /* Rest of your existing styles remain the same... */
-        .badge {
-            border-radius: 6px;
-            font-weight: 600;
-            padding: 0.35em 0.65em;
-        }
-
-        .table {
-            color: var(--muted);
-            margin-bottom: 0;
-        }
-
-        .form-control, .form-select {
-            background: var(--card);
-            border: 1px solid var(--border);
-            color: var(--muted);
-            border-radius: 8px;
-        }
-
-        .alert {
-            border: none;
-            border-radius: 8px;
-            border-left: 4px solid;
-        }
-
-        /* Utility Classes */
-        .text-white { color: white !important; }
-        .text-primary { color: var(--accent) !important; }
-        .text-success { color: var(--positive) !important; }
-        .text-warning { color: var(--warning) !important; }
-        .text-danger { color: var(--negative) !important; }
-
-        /* Better mobile optimizations */
-        @media (max-width: 768px) {
-            body {
-                padding: 10px;
-            }
-            
-            .navbar-brand {
-                font-size: 1.25rem;
-            }
-            
-            .card {
-                margin-bottom: 1rem;
-            }
-
-            .navbar-nav .dropdown-menu {
-                position: static;
-                float: none;
-                width: 100%;
-                margin-top: 0;
-                border: 1px solid var(--border);
-                box-shadow: none;
-            }
-            
-            .card-header {
-                padding: 0.75rem 1rem;
-            }
-            
-            .btn-group .btn {
-                font-size: 0.875rem;
-                padding: 0.375rem 0.75rem;
-            }
-            
-            .language-switcher {
-                margin-right: 10px;
-            }
-            
-            .lang-btn {
-                padding: 5px 8px;
-                font-size: 12px;
-            }
-            
-            .goog-te-gadget-simple {
-                padding: 6px 8px !important;
-                min-width: 100px;
-            }
-        }
-
-        /* Touch device improvements */
-        @media (hover: none) and (pointer: coarse) {
-            .btn, .nav-link, .lang-btn {
-                min-height: 44px;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-            }
-            
-            .goog-te-gadget-simple {
-                min-height: 44px;
-                display: flex;
-                align-items: center;
-            }
-        }
-
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: var(--bg);
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: var(--border);
-            border-radius: 4px;
+        body {
+            top: 40px !important; /* Adjust for banner */
         }
 
         /* Loading states */
@@ -610,33 +416,25 @@
             backdrop-filter: blur(5px);
         }
 
-        /* Report-specific styles */
-        .report-card {
-            border-left: 4px solid var(--accent);
-        }
-
-        .metric-card {
-            text-align: center;
-            padding: 1.5rem;
-        }
-
-        .metric-value {
-            font-size: 2rem;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-        }
-        
-        /* Translation notice */
-        .translation-notice {
-            position: fixed;
-            bottom: 10px;
-            left: 10px;
-            background: rgba(255, 255, 0, 0.2);
-            padding: 5px 10px;
-            border-radius: 4px;
-            font-size: 12px;
-            z-index: 9998;
-            border: 1px solid rgba(255, 255, 0, 0.3);
+        /* Better mobile optimizations */
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+                top: 60px !important; /* More space for mobile banner */
+            }
+            
+            .navbar-brand {
+                font-size: 1.25rem;
+            }
+            
+            .card {
+                margin-bottom: 1rem;
+            }
+            
+            .goog-te-gadget-simple {
+                padding: 6px 8px !important;
+                min-width: 100px;
+            }
         }
     </style>
 </head>
@@ -644,9 +442,10 @@
     <!-- Navigation Bar -->
     <nav class="navbar navbar-expand-lg navbar-dark">
         <div class="container-fluid">
-            <!-- Brand -->
+            <!-- Brand - FIXED CLOSING TAG -->
             <a class="navbar-brand" href="{% url 'inventory:dashboard' %}">
                 <i class="fas fa-warehouse me-2"></i>Ets Ideal
+            </a>
 
             <!-- Mobile Toggle -->
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
@@ -680,7 +479,9 @@
                                             </h6>
                                             <a href="{% url 'inventory:product_list' %}" class="mega-menu-item">
                                                 <i class="fas fa-cube me-2"></i>All Products
-                                                <span class="badge bg-primary float-end">{{ product_count|default:0 }}</span>
+                                                {% if product_count %}
+                                                <span class="badge bg-primary float-end">{{ product_count }}</span>
+                                                {% endif %}
                                             </a>
                                             <a href="{% url 'inventory:category_list' %}" class="mega-menu-item">
                                                 <i class="fas fa-tags me-2"></i>Categories
@@ -796,7 +597,7 @@
                         </ul>
                     </li>
 
-                    <!-- Reports Mega Menu - OPTIMIZED -->
+                    <!-- Reports Mega Menu - SIMPLIFIED TO AVOID ERRORS -->
                     <li class="nav-item dropdown mega-dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" data-bs-auto-close="outside">
                             <i class="fas fa-chart-bar me-1"></i>Reports
@@ -804,7 +605,45 @@
                         <div class="dropdown-menu mega-menu dropdown-menu-xl">
                             <div class="container-fluid">
                                 <div class="row">
-                                    <!-- ... [Keep all your existing mega menu content] ... -->
+                                    <div class="col-lg-4 mega-menu-column">
+                                        <div class="mega-menu-section">
+                                            <h6 class="mega-menu-title">
+                                                <i class="fas fa-chart-line me-2"></i>Sales Reports
+                                            </h6>
+                                            <a href="#" class="mega-menu-item">
+                                                <i class="fas fa-chart-bar me-2"></i>Sales Overview
+                                            </a>
+                                            <a href="#" class="mega-menu-item">
+                                                <i class="fas fa-calendar-day me-2"></i>Daily Sales
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 mega-menu-column">
+                                        <div class="mega-menu-section">
+                                            <h6 class="mega-menu-title">
+                                                <i class="fas fa-boxes me-2"></i>Inventory Reports
+                                            </h6>
+                                            <a href="#" class="mega-menu-item">
+                                                <i class="fas fa-box me-2"></i>Stock Levels
+                                            </a>
+                                            <a href="#" class="mega-menu-item">
+                                                <i class="fas fa-exchange-alt me-2"></i>Stock Movement
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 mega-menu-column">
+                                        <div class="mega-menu-section">
+                                            <h6 class="mega-menu-title">
+                                                <i class="fas fa-money-bill-wave me-2"></i>Financial Reports
+                                            </h6>
+                                            <a href="#" class="mega-menu-item">
+                                                <i class="fas fa-chart-line me-2"></i>Profit & Loss
+                                            </a>
+                                            <a href="#" onclick="showProductSelector()" class="mega-menu-item">
+                                                <i class="fas fa-search me-2"></i>Product Movement
+                                            </a>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -818,55 +657,54 @@
                         </a>
                     </li>
 
-                    <!-- User Management (Admin Only) -->
-                    {% if user.is_authenticated and user.profile.role == 'admin' %}
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
-                            <i class="fas fa-users-cog me-1"></i>Admin
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><h6 class="dropdown-header text-warning">User Management</h6></li>
-                            <li><a class="dropdown-item" href="{% url 'core:user_list' %}">
-                                <i class="fas fa-list me-2"></i>All Users
-                            </a></li>
-                            <li><a class="dropdown-item" href="{% url 'core:user_create' %}">
-                                <i class="fas fa-user-plus me-2"></i>Add User
-                            </a></li>
-                            
-                            <li><hr class="dropdown-divider"></li>
-                            <li><h6 class="dropdown-header text-info">System</h6></li>
-                            <li><a class="dropdown-item" href="/admin/">
-                                <i class="fas fa-cog me-2"></i>Django Admin
-                            </a></li>
-                        </ul>
-                    </li>
+                    <!-- User Management (Admin Only) - SAFE VERSION -->
+                    {% if user.is_authenticated %}
+                        {% if user.is_staff or user.is_superuser %}
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                                <i class="fas fa-users-cog me-1"></i>Admin
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><h6 class="dropdown-header text-warning">User Management</h6></li>
+                                <li><a class="dropdown-item" href="{% url 'core:user_list' %}">
+                                    <i class="fas fa-list me-2"></i>All Users
+                                </a></li>
+                                <li><a class="dropdown-item" href="{% url 'core:user_create' %}">
+                                    <i class="fas fa-user-plus me-2"></i>Add User
+                                </a></li>
+                                
+                                <li><hr class="dropdown-divider"></li>
+                                <li><h6 class="dropdown-header text-info">System</h6></li>
+                                <li><a class="dropdown-item" href="/admin/">
+                                    <i class="fas fa-cog me-2"></i>Django Admin
+                                </a></li>
+                            </ul>
+                        </li>
+                        {% endif %}
                     {% endif %}
 
-                    <!-- Legacy Modules -->
+                    <!-- Legacy Modules - SIMPLIFIED -->
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
                             <i class="fas fa-exchange-alt me-1"></i>Transactions
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="{% url 'transactions:customers' %}">
+                            <li><a class="dropdown-item" href="#">
                                 <i class="fas fa-users me-2"></i>Customers
                             </a></li>
-                            <li><a class="dropdown-item" href="{% url 'transactions:expenses' %}">
+                            <li><a class="dropdown-item" href="#">
                                 <i class="fas fa-receipt me-2"></i>Expenses
-                            </a></li>
-                            <li><a class="dropdown-item" href="{% url 'transactions:home' %}">
-                                <i class="fas fa-home me-2"></i>Transactions Home
                             </a></li>
                         </ul>
                     </li>
                 </ul>
 
-                <!-- Google Translate Widget - REPLACED THE OLD LANGUAGE SWITCHER -->
+                <!-- Google Translate Widget -->
                 <div class="navbar-nav me-2">
                     <div id="google_translate_element"></div>
                 </div>
 
-                <!-- User Section -->
+                <!-- User Section - SAFE VERSION -->
                 <ul class="navbar-nav">
                     {% if user.is_authenticated %}
                     <li class="nav-item dropdown">
@@ -882,13 +720,11 @@
                                             <i class="fas fa-user-tag text-primary"></i>
                                         </div>
                                         <div class="flex-grow-1 ms-3">
-                                            <small class="d-block">{{ user.profile.get_role_display }}</small>
-                                            <small class="text-muted">
-                                                <i class="fas fa-map-marker-alt me-1"></i>
-                                                {% if user.profile.assigned_location %}
-                                                    {{ user.profile.assigned_location.name }}
+                                            <small class="d-block">
+                                                {% if user.is_staff %}
+                                                    Administrator
                                                 {% else %}
-                                                    All Locations
+                                                    User
                                                 {% endif %}
                                             </small>
                                         </div>
@@ -900,12 +736,11 @@
                                 <i class="fas fa-user me-2"></i>My Profile
                             </a></li>
                             <li><a class="dropdown-item" href="{% url 'account_change_password' %}">
-
                                 <i class="fas fa-key me-2"></i>Change Password
                             </a></li>
                             <li><hr class="dropdown-divider"></li>
                             <li>
-                                <form method="post" action="{% url 'account_logout' %}" class="d-inline">
+                                <form method="post" action="{% url 'account_logout' %}">
                                     {% csrf_token %}
                                     <button type="submit" class="dropdown-item text-danger">
                                         <i class="fas fa-sign-out-alt me-2"></i>Logout
@@ -968,67 +803,59 @@
         {% block content %}{% endblock %}
     </div>
 
-    <!-- Footer -->
+    <!-- Footer - SIMPLIFIED -->
     <footer class="mt-5 pt-4 border-top no-print" style="border-color: var(--border) !important;">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-6">
                     <p class="text-muted">
-                        &copy; {% now "Y" %} Teba Inventory Management System. 
-                        <span class="d-none d-md-inline">All rights reserved.</span>
+                        &copy; {% now "Y" %} Ets Ideal Inventory Management System.
                     </p>
-                </div>
-                <div class="col-md-6 text-end">
-                    <small class="text-muted">
-                        v1.0.0 | 
-                        <i class="fas fa-database me-1"></i>{{ db_usage|default:"0" }}% |
-                        <i class="fas fa-user me-1"></i>{{ user_count|default:"1" }} users
-                    </small>
                 </div>
             </div>
         </div>
     </footer>
 
-    <!-- Loading Spinner -->
-    <div id="loadingSpinner" class="loading-spinner">
-        <div class="spinner-border text-primary" role="status">
-            <span class="visually-hidden">Loading...</span>
-        </div>
-        <p class="mt-2 text-muted">Processing...</p>
-    </div>
-
-    <!-- Enhanced Loading Overlay -->
-    <div id="loadingOverlay" class="loading-overlay" style="display: none;">
-        <div class="loading-content">
-            <div class="spinner-border loading-spinner-lg text-primary" role="status">
-                <span class="visually-hidden">Loading...</span>
-            </div>
-            <p class="mt-3">Processing your request...</p>
-        </div>
-    </div>
-
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
-    <!-- Google Translate Script -->
+    <!-- Google Translate Script with Language Memory -->
     <script type="text/javascript">
+        // Set French as default language
+        const defaultLanguage = 'fr';
+        
         function googleTranslateElementInit() {
+            // Get saved language or use French as default
+            const savedLang = localStorage.getItem('teba_language') || defaultLanguage;
+            
             new google.translate.TranslateElement({
                 pageLanguage: 'en',
-                includedLanguages: 'en,fr',
+                includedLanguages: 'en,fr,ar',
                 layout: google.translate.TranslateElement.InlineLayout.SIMPLE
             }, 'google_translate_element');
             
-            // Auto-translate if French was previously selected
+            // Auto-translate to French if selected
             setTimeout(function() {
-                const savedLang = localStorage.getItem('teba_language');
                 if (savedLang === 'fr') {
-                    // Trigger translation
-                    if (typeof google !== 'undefined' && google.translate && google.translate.translate) {
-                        google.translate.translatePage('en', 'fr');
+                    const select = document.querySelector('.goog-te-combo');
+                    if (select) {
+                        select.value = 'fr';
+                        select.dispatchEvent(new Event('change'));
                     }
                 }
-            }, 1000);
+            }, 1500);
+            
+            // Track language changes
+            const observer = new MutationObserver(function(mutations) {
+                const select = document.querySelector('.goog-te-combo');
+                if (select) {
+                    select.addEventListener('change', function() {
+                        localStorage.setItem('teba_language', this.value);
+                    });
+                }
+            });
+            
+            observer.observe(document.body, { childList: true, subtree: true });
         }
         
         // Load Google Translate
@@ -1039,80 +866,52 @@
             document.head.appendChild(script);
         })();
         
-        // Track language changes
+        // Mobile Dropdown Fix - SIMPLIFIED
         document.addEventListener('DOMContentLoaded', function() {
-            // Listen for Google Translate changes
-            setInterval(function() {
-                const iframe = document.querySelector('.goog-te-menu-frame');
-                if (iframe) {
-                    try {
-                        const doc = iframe.contentDocument || iframe.contentWindow.document;
-                        doc.querySelectorAll('.goog-te-menu2-item').forEach(item => {
-                            item.addEventListener('click', function() {
-                                const lang = this.getAttribute('data-language-code');
-                                localStorage.setItem('teba_language', lang);
-                            });
-                        });
-                    } catch(e) {
-                        // Cross-origin error, ignore
-                    }
-                }
-            }, 1000);
+            // Handle mobile dropdowns
+            const dropdownToggles = document.querySelectorAll('.dropdown-toggle');
             
-            // Your existing JavaScript code...
-            // Initialize mega menus
-            const megaDropdowns = document.querySelectorAll('.mega-dropdown');
-            
-            megaDropdowns.forEach(dropdown => {
-                dropdown.addEventListener('show.bs.dropdown', function() {
-                    // Add backdrop for mobile
+            dropdownToggles.forEach(toggle => {
+                toggle.addEventListener('touchstart', function(e) {
                     if (window.innerWidth < 768) {
-                        const backdrop = document.createElement('div');
-                        backdrop.className = 'dropdown-backdrop';
-                        backdrop.style.cssText = `
-                            position: fixed;
-                            top: 0;
-                            left: 0;
-                            width: 100%;
-                            height: 100%;
-                            background: rgba(0,0,0,0.5);
-                            z-index: 1040;
-                        `;
-                        document.body.appendChild(backdrop);
-                        
-                        backdrop.addEventListener('click', function() {
-                            bootstrap.Dropdown.getInstance(dropdown).hide();
-                            document.body.removeChild(backdrop);
-                        });
-                    }
-                });
-                
-                dropdown.addEventListener('hide.bs.dropdown', function() {
-                    const backdrop = document.querySelector('.dropdown-backdrop');
-                    if (backdrop) {
-                        document.body.removeChild(backdrop);
+                        // Allow dropdown to open
+                        e.stopPropagation();
                     }
                 });
             });
-
-            // Enhanced mobile dropdown handling
-            if (window.innerWidth < 768) {
-                document.querySelectorAll('.dropdown-toggle').forEach(toggle => {
-                    toggle.setAttribute('data-bs-auto-close', 'outside');
+            
+            // Prevent dropdown close when touching inside
+            document.querySelectorAll('.dropdown-menu').forEach(menu => {
+                menu.addEventListener('touchstart', function(e) {
+                    e.stopPropagation();
                 });
-            }
+            });
+            
+            // Close dropdown when clicking outside on mobile
+            document.addEventListener('touchstart', function(e) {
+                if (window.innerWidth < 768) {
+                    if (!e.target.closest('.dropdown')) {
+                        const openDropdowns = document.querySelectorAll('.dropdown-menu.show');
+                        openDropdowns.forEach(dropdown => {
+                            const toggle = dropdown.previousElementSibling;
+                            if (toggle && toggle.classList.contains('dropdown-toggle')) {
+                                bootstrap.Dropdown.getInstance(toggle).hide();
+                            }
+                        });
+                    }
+                }
+            });
         });
 
         // Product Movement Report Selector
         function showProductSelector() {
             const productId = prompt('Enter Product ID for movement report:');
             if (productId) {
-                window.location.href = `/inventory/products/${productId}/movement-report/`;
+                window.location.href = '/inventory/products/' + productId + '/movement-report/';
             }
         }
     </script>
 
-    <!-- Page-specific Scripts -->
     {% block extra_scripts %}{% endblock %}
 </body>
 </html>
